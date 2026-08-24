@@ -4,55 +4,68 @@
 
 const projects = {
 
-    deltarune: {
+deltarune: {
 
-        number: "PROJECT 01",
+    number: "PROJECT 01",
 
-        title: "Deltarune Fighting Game",
+    title: "Deltarune Fighting Game",
 
-        type: "GAME DEVELOPMENT",
+    type: "GAME DEVELOPMENT",
 
-        description:
-            "Juego de lucha inspirado en Deltarune y otros fighting games. El proyecto experimenta con sistemas de combate, personajes, knockback, porcentajes y habilidades especiales.",
-
-        systems: [
-            "Percentage System",
-            "Knockback",
-            "Hitboxes",
-            "Parry",
-            "Special Attacks",
-            "Projectile System"
-        ],
-
-        status: "IN DEVELOPMENT"
-
+    profile: {
+        gameplay: 5,
+        visuals: 6,
+        audio: 1,
+        stability: 8,
+        release: 5
     },
 
+    description:
+        "Juego de lucha inspirado en Deltarune y otros fighting games. El proyecto experimenta con sistemas de combate, personajes, knockback, porcentajes y habilidades especiales.",
 
-    cheques: {
+    systems: [
+        "Percentage System",
+        "Knockback",
+        "Hitboxes",
+        "Parry",
+        "Special Attacks",
+        "Projectile System"
+    ],
 
-        number: "PROJECT 02",
+    status: "EN DESARROLLO ACTIVO"
+},
 
-        title: "Sistema de Gestión de Cheques",
 
-        type: "SOFTWARE DEVELOPMENT",
+   cheques: {
 
-        description:
-            "Aplicación de escritorio desarrollada para gestionar cheques y beneficiarios mediante una base de datos local.",
+    number: "PROJECT 02",
 
-        systems: [
-            "SQLite Database",
-            "Cheque Management",
-            "Beneficiary Management",
-            "CRUD Operations",
-            "Windows Forms",
-            "Data Persistence"
-        ],
+    title: "Sistema de Gestión de Cheques",
 
-        status: "READY TO UPLOAD"
+    type: "SOFTWARE DEVELOPMENT",
 
+    progress: {
+        development: 100,
+        database: 100,
+        interface: 95,
+        testing: 90,
+        documentation: 100
     },
 
+    description:
+        "Aplicación de escritorio desarrollada para gestionar cheques y beneficiarios mediante una base de datos local.",
+
+    systems: [
+        "SQLite Database",
+        "Cheque Management",
+        "Beneficiary Management",
+        "CRUD Operations",
+        "Windows Forms",
+        "Data Persistence"
+    ],
+
+    status: "DESARROLLO TERMINADO · LISTO PARA SUBIR"
+},
 
     undertale: {
 
@@ -61,6 +74,14 @@ const projects = {
         title: "Undertale Battle Engine",
 
         type: "GAME DEVELOPMENT",
+
+       profile: {
+    gameplay: 3,
+    visuals: 7,
+    audio: 3,
+    stability: 9,
+    release: 3
+},
 
         description:
             "Motor experimental de combate inspirado en las mecánicas de batalla de Undertale.",
@@ -87,6 +108,14 @@ const projects = {
 
         type: "GAME DEVELOPMENT",
 
+       profile: {
+    gameplay: 9,
+    visuals: 4,
+    audio: 7,
+    stability: 9,
+    release: 8
+},
+
         description:
             "Juego experimental de enfrentamiento entre un alma y Sans. El proyecto combina movimiento, proyectiles, parry y supervivencia.",
 
@@ -104,7 +133,6 @@ const projects = {
     }
 
 };
-
 
 /* =========================================
    OPEN PROJECT
@@ -157,8 +185,22 @@ function openProject(projectID) {
 
     document.body.style.overflow = "hidden";
 
-}
 
+    /* =====================================
+       DEVELOPMENT PROFILE
+    ===================================== */
+
+    if (project.profile) {
+
+        setTimeout(() => {
+
+            drawDevelopmentChart(project.profile);
+
+        }, 250);
+
+    }
+
+}
 
 /* =========================================
    CLOSE PROJECT
@@ -172,6 +214,398 @@ function closeProject() {
 
 
     document.body.style.overflow = "";
+
+}
+
+/* =========================================
+   DEVELOPMENT PROFILE
+========================================= */
+
+let chartAnimation;
+
+
+function drawDevelopmentChart(profile) {
+
+    const canvas =
+        document.getElementById("development-chart");
+
+    if (!canvas || !profile) return;
+
+
+    const ctx = canvas.getContext("2d");
+
+
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    const dpr = window.devicePixelRatio || 1;
+
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+   
+ctx.clearRect(
+    0,
+    0,
+    width,
+    height
+);
+   
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    const radius =
+        Math.min(width, height) * 0.32;
+
+
+    /* =====================================
+       VALUES
+    ===================================== */
+
+    const values = [
+
+        profile.gameplay,
+        profile.visuals,
+        profile.audio,
+        profile.stability,
+        profile.release
+
+    ];
+
+
+    const labels = [
+
+        "GAMEPLAY",
+        "VISUALS",
+        "AUDIO",
+        "STABILITY",
+        "RELEASE"
+
+    ];
+
+
+    const points = 5;
+
+    const startAngle = -Math.PI / 2;
+
+
+    /* =====================================
+       GRID
+    ===================================== */
+
+    for (let level = 1; level <= 10; level++) {
+
+        const currentRadius =
+            radius * (level / 10);
+
+
+        ctx.beginPath();
+
+
+        for (let i = 0; i < points; i++) {
+
+            const angle =
+                startAngle +
+                (Math.PI * 2 / points) * i;
+
+
+            const x =
+                centerX +
+                Math.cos(angle) *
+                currentRadius;
+
+
+            const y =
+                centerY +
+                Math.sin(angle) *
+                currentRadius;
+
+
+            if (i === 0) {
+
+                ctx.moveTo(x, y);
+
+            } else {
+
+                ctx.lineTo(x, y);
+
+            }
+
+        }
+
+
+        ctx.closePath();
+
+
+        ctx.strokeStyle =
+            "rgba(255,255,255,0.07)";
+
+        ctx.lineWidth = 1;
+
+        ctx.stroke();
+
+    }
+
+
+    /* =====================================
+       AXIS
+    ===================================== */
+
+    for (let i = 0; i < points; i++) {
+
+        const angle =
+            startAngle +
+            (Math.PI * 2 / points) * i;
+
+
+        const x =
+            centerX +
+            Math.cos(angle) * radius;
+
+
+        const y =
+            centerY +
+            Math.sin(angle) * radius;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            centerX,
+            centerY
+        );
+
+        ctx.lineTo(x, y);
+
+
+        ctx.strokeStyle =
+            "rgba(64,220,203,0.25)";
+
+        ctx.stroke();
+
+    }
+
+
+    /* =====================================
+       DEVELOPMENT POLYGON
+    ===================================== */
+
+    ctx.beginPath();
+
+
+    values.forEach((value, i) => {
+
+        const angle =
+            startAngle +
+            (Math.PI * 2 / points) * i;
+
+
+        const currentRadius =
+            radius * (value / 10);
+
+
+        const x =
+            centerX +
+            Math.cos(angle) *
+            currentRadius;
+
+
+        const y =
+            centerY +
+            Math.sin(angle) *
+            currentRadius;
+
+
+        if (i === 0) {
+
+            ctx.moveTo(x, y);
+
+        } else {
+
+            ctx.lineTo(x, y);
+
+        }
+
+    });
+
+
+    ctx.closePath();
+
+
+    /* Fill */
+
+    ctx.fillStyle =
+        "rgba(124,92,255,0.18)";
+
+    ctx.fill();
+
+
+    /* Border */
+
+    ctx.strokeStyle =
+        "#7c5cff";
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    /* =====================================
+       POINTS + NUMBERS
+    ===================================== */
+
+    values.forEach((value, i) => {
+
+        const angle =
+            startAngle +
+            (Math.PI * 2 / points) * i;
+
+
+        const currentRadius =
+            radius * (value / 10);
+
+
+        const x =
+            centerX +
+            Math.cos(angle) *
+            currentRadius;
+
+
+        const y =
+            centerY +
+            Math.sin(angle) *
+            currentRadius;
+
+
+        /* Point */
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            5,
+            0,
+            Math.PI * 2
+        );
+
+
+        ctx.fillStyle =
+            "#40dccb";
+
+        ctx.fill();
+
+
+        /* Number */
+
+        ctx.font =
+            "bold 12px Arial";
+
+        ctx.fillStyle =
+            "#40dccb";
+
+        ctx.textAlign =
+            "center";
+
+        ctx.textBaseline =
+            "middle";
+
+
+        const numberDistance = 18;
+
+
+        const numberX =
+            x +
+            Math.cos(angle) *
+            numberDistance;
+
+
+        const numberY =
+            y +
+            Math.sin(angle) *
+            numberDistance;
+
+
+        ctx.fillText(
+            value + "/10",
+            numberX,
+            numberY
+        );
+
+    });
+
+
+    /* =====================================
+       LABELS
+    ===================================== */
+
+    labels.forEach((label, i) => {
+
+        const angle =
+            startAngle +
+            (Math.PI * 2 / points) * i;
+
+
+        const labelRadius =
+            radius + 42;
+
+
+        const x =
+            centerX +
+            Math.cos(angle) *
+            labelRadius;
+
+
+        const y =
+            centerY +
+            Math.sin(angle) *
+            labelRadius;
+
+
+        ctx.font =
+            "bold 10px Arial";
+
+        ctx.fillStyle =
+            "#858894";
+
+
+        ctx.textAlign =
+            "center";
+
+        ctx.textBaseline =
+            "middle";
+
+
+        ctx.fillText(
+            label,
+            x,
+            y
+        );
+
+    });
+
+
+    /* =====================================
+       CENTER
+    ===================================== */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        centerX,
+        centerY,
+        3,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fillStyle =
+        "#40dccb";
+
+    ctx.fill();
 
 }
 
