@@ -1058,3 +1058,160 @@ footer {
     }
 
 }
+
+/* =========================================
+   SKILLS
+========================================= */
+
+#habilidades {
+
+    background: #08090d;
+
+}
+
+
+.skills-container {
+
+    max-width: 1000px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 60px;
+
+}
+
+
+.skills-category {
+
+    border-left: 1px solid var(--border);
+
+    padding-left: 30px;
+
+}
+
+
+.skills-category-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.skills-category-header span {
+
+    color: var(--turquoise);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.skills-category-header h3 {
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.skill-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+
+.skill {
+
+    width: 100%;
+
+}
+
+
+.skill-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+}
+
+
+.skill-info span:first-child {
+
+    color: #ddd;
+
+    font-size: 13px;
+
+}
+
+
+.skill-info span:last-child {
+
+    color: var(--turquoise);
+
+    font-size: 11px;
+
+}
+
+
+.skill-bar {
+
+    height: 8px;
+
+    width: 100%;
+
+    background: #15171f;
+
+    border: 1px solid var(--border);
+
+    overflow: hidden;
+
+}
+
+
+.skill-fill {
+
+    width: 0;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--accent),
+            var(--turquoise)
+        );
+
+    transition:
+        width 1.2s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.skill-fill.active {
+
+    width: calc(
+        var(--level) * 10%
+    );
+
+}
+
