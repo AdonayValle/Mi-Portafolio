@@ -614,5 +614,326 @@ footer {
 }
 
 
+/* =========================================
+   PROJECT MODAL
+========================================= */
 
+.project-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 40px;
+
+    z-index: 2000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+}
+
+
+.project-modal.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.modal-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* =========================================
+   WINDOW
+========================================= */
+
+.modal-window {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(900px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #0e1017;
+
+    border: 1px solid var(--border);
+
+    padding: 45px;
+
+    transform: translateY(30px) scale(0.97);
+
+    transition: 0.35s ease;
+
+}
+
+
+.project-modal.active .modal-window {
+
+    transform: translateY(0) scale(1);
+
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.modal-close {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    width: 40px;
+
+    height: 40px;
+
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+.modal-close:hover {
+
+    border-color: var(--turquoise);
+
+    color: var(--turquoise);
+
+}
+
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.modal-header {
+
+    margin-bottom: 30px;
+
+}
+
+.modal-header h2 {
+
+    margin: 10px 0;
+
+}
+
+#modal-type {
+
+    color: var(--turquoise);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =========================================
+   MODAL IMAGE
+========================================= */
+
+.modal-image {
+
+    height: 350px;
+
+    margin-bottom: 40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #171923,
+            #0d0e14
+        );
+
+    border: 1px solid var(--border);
+
+}
+
+
+/* =========================================
+   MODAL SECTIONS
+========================================= */
+
+.modal-section {
+
+    margin-bottom: 35px;
+
+}
+
+.modal-section h3 {
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    color: var(--turquoise);
+
+    margin-bottom: 15px;
+
+}
+
+.modal-section p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================
+   SYSTEM LIST
+========================================= */
+
+#modal-systems {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    list-style: none;
+
+}
+
+#modal-systems li {
+
+    padding: 12px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    color: #bbb;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================
+   DEVELOPMENT PROFILE
+========================================= */
+
+.development-chart {
+
+    height: 300px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.015);
+
+    border: 1px solid var(--border);
+
+}
+
+.chart-placeholder {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.modal-status {
+
+    color: var(--turquoise) !important;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .project-modal {
+
+        padding: 15px;
+
+    }
+
+    .modal-window {
+
+        padding: 25px;
+
+        max-height: 95vh;
+
+    }
+
+    .modal-image {
+
+        height: 220px;
+
+    }
+
+    #modal-systems {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
 
