@@ -245,24 +245,20 @@ function drawDevelopmentChart(profile) {
     canvas.height = height * dpr;
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-   
-ctx.clearRect(
-    0,
-    0,
-    width,
-    height
-);
-   
+
+
     const centerX = width / 2;
     const centerY = height / 2;
 
+
+    /*
+        Más pequeño que el contenedor para
+        dejar espacio a las etiquetas.
+    */
+
     const radius =
-        Math.min(width, height) * 0.32;
+        Math.min(width, height) * 0.36;
 
-
-    /* =====================================
-       VALUES
-    ===================================== */
 
     const values = [
 
@@ -291,24 +287,171 @@ ctx.clearRect(
     const startAngle = -Math.PI / 2;
 
 
-    /* =====================================
-       GRID
-    ===================================== */
+    /*
+        Duración de la animación
+    */
 
-    for (let level = 1; level <= 10; level++) {
+    const duration = 900;
 
-        const currentRadius =
-            radius * (level / 10);
+    const startTime = performance.now();
 
 
-        ctx.beginPath();
+    function animate(currentTime) {
 
+        const elapsed =
+            currentTime - startTime;
+
+
+        const progress =
+            Math.min(elapsed / duration, 1);
+
+
+        /*
+            Suavizado
+        */
+
+        const eased =
+            1 - Math.pow(1 - progress, 3);
+
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /* =====================================
+           GRID
+        ===================================== */
+
+        for (let level = 1; level <= 10; level++) {
+
+            const currentRadius =
+                radius * (level / 10);
+
+
+            ctx.beginPath();
+
+
+            for (let i = 0; i < points; i++) {
+
+                const angle =
+                    startAngle +
+                    (Math.PI * 2 / points) * i;
+
+
+                const x =
+                    centerX +
+                    Math.cos(angle) *
+                    currentRadius;
+
+
+                const y =
+                    centerY +
+                    Math.sin(angle) *
+                    currentRadius;
+
+
+                if (i === 0) {
+
+                    ctx.moveTo(x, y);
+
+                } else {
+
+                    ctx.lineTo(x, y);
+
+                }
+
+            }
+
+
+            ctx.closePath();
+
+
+            /*
+                Verde oscuro en los niveles
+            */
+
+            ctx.strokeStyle =
+                level === 10
+                    ? "rgba(64,220,203,0.28)"
+                    : "rgba(23,59,56,0.65)";
+
+
+            ctx.lineWidth =
+                level === 10 ? 1.5 : 1;
+
+
+            ctx.stroke();
+
+        }
+
+
+        /* =====================================
+           AXIS
+        ===================================== */
 
         for (let i = 0; i < points; i++) {
 
             const angle =
                 startAngle +
                 (Math.PI * 2 / points) * i;
+
+
+            const x =
+                centerX +
+                Math.cos(angle) * radius;
+
+
+            const y =
+                centerY +
+                Math.sin(angle) * radius;
+
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                centerX,
+                centerY
+            );
+
+            ctx.lineTo(x, y);
+
+
+            ctx.strokeStyle =
+                "rgba(64,220,203,0.22)";
+
+            ctx.lineWidth = 1;
+
+            ctx.stroke();
+
+        }
+
+
+        /* =====================================
+           ANIMATED DATA
+        ===================================== */
+
+        const animatedValues =
+            values.map(value =>
+                value * eased
+            );
+
+
+        ctx.beginPath();
+
+
+        animatedValues.forEach((value, i) => {
+
+            const angle =
+                startAngle +
+                (Math.PI * 2 / points) * i;
+
+
+            const currentRadius =
+                radius * (value / 10);
 
 
             const x =
@@ -333,160 +476,210 @@ ctx.clearRect(
 
             }
 
-        }
+        });
 
 
         ctx.closePath();
 
 
-        ctx.strokeStyle =
-            "rgba(255,255,255,0.07)";
+        /*
+            Relleno morado
+        */
 
-        ctx.lineWidth = 1;
+        ctx.fillStyle =
+            "rgba(124,92,255,0.20)";
+
+        ctx.fill();
+
+
+        /*
+            Borde turquesa
+        */
+
+        ctx.strokeStyle =
+            "#40dccb";
+
+        ctx.lineWidth = 2.5;
 
         ctx.stroke();
 
-    }
+
+        /* =====================================
+           DATA POINTS
+        ===================================== */
+
+        animatedValues.forEach((value, i) => {
+
+            const angle =
+                startAngle +
+                (Math.PI * 2 / points) * i;
 
 
-    /* =====================================
-       AXIS
-    ===================================== */
-
-    for (let i = 0; i < points; i++) {
-
-        const angle =
-            startAngle +
-            (Math.PI * 2 / points) * i;
+            const currentRadius =
+                radius * (value / 10);
 
 
-        const x =
-            centerX +
-            Math.cos(angle) * radius;
+            const x =
+                centerX +
+                Math.cos(angle) *
+                currentRadius;
 
 
-        const y =
-            centerY +
-            Math.sin(angle) * radius;
+            const y =
+                centerY +
+                Math.sin(angle) *
+                currentRadius;
 
 
-        ctx.beginPath();
+            /*
+                Glow
+            */
 
-        ctx.moveTo(
-            centerX,
-            centerY
-        );
+            ctx.beginPath();
 
-        ctx.lineTo(x, y);
-
-
-        ctx.strokeStyle =
-            "rgba(64,220,203,0.25)";
-
-        ctx.stroke();
-
-    }
+            ctx.arc(
+                x,
+                y,
+                9,
+                0,
+                Math.PI * 2
+            );
 
 
-    /* =====================================
-       DEVELOPMENT POLYGON
-    ===================================== */
+            ctx.fillStyle =
+                "rgba(64,220,203,0.12)";
 
-    ctx.beginPath();
-
-
-    values.forEach((value, i) => {
-
-        const angle =
-            startAngle +
-            (Math.PI * 2 / points) * i;
+            ctx.fill();
 
 
-        const currentRadius =
-            radius * (value / 10);
+            /*
+                Punto
+            */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                5,
+                0,
+                Math.PI * 2
+            );
 
 
-        const x =
-            centerX +
-            Math.cos(angle) *
-            currentRadius;
+            ctx.fillStyle =
+                "#40dccb";
+
+            ctx.fill();
 
 
-        const y =
-            centerY +
-            Math.sin(angle) *
-            currentRadius;
+            /*
+                Número
+            */
+
+            ctx.font =
+                "bold 12px Arial";
+
+            ctx.fillStyle =
+                "#40dccb";
+
+            ctx.textAlign =
+                "center";
+
+            ctx.textBaseline =
+                "middle";
 
 
-        if (i === 0) {
-
-            ctx.moveTo(x, y);
-
-        } else {
-
-            ctx.lineTo(x, y);
-
-        }
-
-    });
+            const numberDistance = 19;
 
 
-    ctx.closePath();
+            const numberX =
+                x +
+                Math.cos(angle) *
+                numberDistance;
 
 
-    /* Fill */
-
-    ctx.fillStyle =
-        "rgba(124,92,255,0.18)";
-
-    ctx.fill();
+            const numberY =
+                y +
+                Math.sin(angle) *
+                numberDistance;
 
 
-    /* Border */
+            ctx.fillText(
+                value.toFixed(1) + "/10",
+                numberX,
+                numberY
+            );
 
-    ctx.strokeStyle =
-        "#7c5cff";
-
-    ctx.lineWidth = 2;
-
-    ctx.stroke();
-
-
-    /* =====================================
-       POINTS + NUMBERS
-    ===================================== */
-
-    values.forEach((value, i) => {
-
-        const angle =
-            startAngle +
-            (Math.PI * 2 / points) * i;
+        });
 
 
-        const currentRadius =
-            radius * (value / 10);
+        /* =====================================
+           LABELS
+        ===================================== */
+
+        labels.forEach((label, i) => {
+
+            const angle =
+                startAngle +
+                (Math.PI * 2 / points) * i;
 
 
-        const x =
-            centerX +
-            Math.cos(angle) *
-            currentRadius;
+            /*
+                Más alejadas del pentágono
+            */
+
+            const labelRadius =
+                radius + 65;
 
 
-        const y =
-            centerY +
-            Math.sin(angle) *
-            currentRadius;
+            const x =
+                centerX +
+                Math.cos(angle) *
+                labelRadius;
 
 
-        /* Point */
+            const y =
+                centerY +
+                Math.sin(angle) *
+                labelRadius;
+
+
+            ctx.font =
+                "bold 10px Arial";
+
+
+            ctx.fillStyle =
+                "#858894";
+
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.textBaseline =
+                "middle";
+
+
+            ctx.fillText(
+                label,
+                x,
+                y
+            );
+
+        });
+
+
+        /* =====================================
+           CENTER
+        ===================================== */
 
         ctx.beginPath();
 
         ctx.arc(
-            x,
-            y,
-            5,
+            centerX,
+            centerY,
+            4,
             0,
             Math.PI * 2
         );
@@ -498,118 +691,22 @@ ctx.clearRect(
         ctx.fill();
 
 
-        /* Number */
+        /*
+            Continuar animación
+        */
 
-        ctx.font =
-            "bold 12px Arial";
+        if (progress < 1) {
 
-        ctx.fillStyle =
-            "#40dccb";
+            requestAnimationFrame(animate);
 
-        ctx.textAlign =
-            "center";
+        }
 
-        ctx.textBaseline =
-            "middle";
+    }
 
 
-        const numberDistance = 18;
-
-
-        const numberX =
-            x +
-            Math.cos(angle) *
-            numberDistance;
-
-
-        const numberY =
-            y +
-            Math.sin(angle) *
-            numberDistance;
-
-
-        ctx.fillText(
-            value + "/10",
-            numberX,
-            numberY
-        );
-
-    });
-
-
-    /* =====================================
-       LABELS
-    ===================================== */
-
-    labels.forEach((label, i) => {
-
-        const angle =
-            startAngle +
-            (Math.PI * 2 / points) * i;
-
-
-        const labelRadius =
-            radius + 42;
-
-
-        const x =
-            centerX +
-            Math.cos(angle) *
-            labelRadius;
-
-
-        const y =
-            centerY +
-            Math.sin(angle) *
-            labelRadius;
-
-
-        ctx.font =
-            "bold 10px Arial";
-
-        ctx.fillStyle =
-            "#858894";
-
-
-        ctx.textAlign =
-            "center";
-
-        ctx.textBaseline =
-            "middle";
-
-
-        ctx.fillText(
-            label,
-            x,
-            y
-        );
-
-    });
-
-
-    /* =====================================
-       CENTER
-    ===================================== */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        centerX,
-        centerY,
-        3,
-        0,
-        Math.PI * 2
-    );
-
-
-    ctx.fillStyle =
-        "#40dccb";
-
-    ctx.fill();
+    requestAnimationFrame(animate);
 
 }
-
-
 /* =========================================
    ESC KEY
 ========================================= */
