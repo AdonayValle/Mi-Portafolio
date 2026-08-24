@@ -956,3 +956,105 @@ footer {
 
 }
 
+/* =========================================
+   PROJECT PROGRESS
+========================================= */
+
+.project-progress {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+
+.progress-item {
+
+    width: 100%;
+
+}
+
+
+.progress-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.progress-header span:first-child {
+
+    color: #aaa;
+
+}
+
+
+.progress-header span:last-child {
+
+    color: var(--turquoise);
+
+}
+
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 7px;
+
+    background: #171923;
+
+    border: 1px solid var(--border);
+
+    overflow: hidden;
+
+}
+
+
+.progress-fill {
+
+    height: 100%;
+
+    width: var(--progress);
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--dark-green),
+            var(--turquoise)
+        );
+
+    transform-origin: left;
+
+    animation:
+        progressReveal 0.9s ease forwards;
+
+}
+
+
+@keyframes progressReveal {
+
+    from {
+
+        transform: scaleX(0);
+
+    }
+
+    to {
+
+        transform: scaleX(1);
+
+    }
+
+}
