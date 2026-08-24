@@ -70,7 +70,7 @@
 
         <!-- DELTARUNE FIGHTING GAME -->
 
-        <article class="project-card">
+        <article class="project-card" onclick="openProject('deltarune')">
 
             <div class="project-image project-deltarune">
 
@@ -109,7 +109,7 @@
 
         <!-- SISTEMA DE CHEQUES -->
 
-        <article class="project-card">
+        <article class="project-card" onclick="openProject('cheques')">
 
             <div class="project-image project-cheques">
 
@@ -149,7 +149,7 @@
 
         <!-- UNDERTALE ENGINE -->
 
-        <article class="project-card">
+        <article class="project-card" onclick="openProject('undertale')">
 
             <div class="project-image project-undertale">
 
@@ -188,7 +188,7 @@
 
         <!-- SOLFIRE -->
 
-        <article class="project-card">
+        <article class="project-card" onclick="openProject('solfire')">
 
             <div class="project-image project-solfire">
 
@@ -229,7 +229,109 @@
 
 </section>
 
+<!-- =========================================
+     PROJECT MODALS
+========================================= -->
 
+<div id="project-modal" class="project-modal">
+
+    <div class="modal-overlay" onclick="closeProject()"></div>
+
+
+    <div class="modal-window">
+
+        <button class="modal-close" onclick="closeProject()">
+            ×
+        </button>
+
+
+        <!-- PROJECT HEADER -->
+
+        <div class="modal-header">
+
+            <p id="modal-number" class="section-label">
+                PROJECT 01
+            </p>
+
+            <h2 id="modal-title">
+                Project Title
+            </h2>
+
+            <p id="modal-type">
+                GAME DEVELOPMENT
+            </p>
+
+        </div>
+
+
+        <!-- PROJECT IMAGE -->
+
+        <div id="modal-image" class="modal-image">
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="modal-section">
+
+            <h3>ABOUT</h3>
+
+            <p id="modal-description">
+                Project description.
+            </p>
+
+        </div>
+
+
+        <!-- SYSTEMS -->
+
+        <div class="modal-section">
+
+            <h3>SYSTEMS</h3>
+
+            <ul id="modal-systems">
+
+            </ul>
+
+        </div>
+
+
+        <!-- DEVELOPMENT PROFILE -->
+
+        <div id="development-section" class="modal-section">
+
+            <h3>DEVELOPMENT PROFILE</h3>
+
+            <div class="development-chart">
+
+                <div class="chart-placeholder">
+                    DEVELOPMENT PROFILE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="modal-section">
+
+            <h3>STATUS</h3>
+
+            <p id="modal-status" class="modal-status">
+                IN DEVELOPMENT
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+        
         <section id="habilidades">
 
             <h2>HABILIDADES</h2>
