@@ -859,3 +859,65 @@ function drawProgressBars(progress) {
 
 }
 
+/* =========================================
+   SKILLS ANIMATION
+========================================= */
+
+const skillObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    const fills =
+                        entry.target.querySelectorAll(
+                            ".skill-fill"
+                        );
+
+
+                    fills.forEach(fill => {
+
+                        const level =
+                            fill.style
+                                .getPropertyValue(
+                                    "--level"
+                                );
+
+
+                        fill.style.width =
+                            `${level * 10}%`;
+
+                    });
+
+
+                    skillObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.2
+        }
+
+    );
+
+
+const skillsSection =
+    document.getElementById("habilidades");
+
+
+if (skillsSection) {
+
+    skillObserver.observe(
+        skillsSection
+    );
+
+}
