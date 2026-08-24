@@ -376,6 +376,12 @@ footer {
     align-items: start;
 }
 
+.project-card {
+    width: 100%;
+    min-width: 0;
+}
+
+
 
 /* =========================================
    PROJECT CARD
