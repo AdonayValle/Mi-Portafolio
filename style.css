@@ -1,3 +1,7 @@
+/* =========================================
+   RESET
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,16 +14,46 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    background: #0b0b0f;
-    color: #ffffff;
+    background: #08090d;
+    color: #f5f5f5;
+    overflow-x: hidden;
 }
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+:root {
+    --background: #08090d;
+    --surface: #11131a;
+    --text: #f5f5f5;
+    --muted: #858894;
+    --accent: #7c5cff;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
 
 header {
     position: fixed;
     top: 0;
+    left: 0;
+
     width: 100%;
-    padding: 20px 60px;
-    background: rgba(11, 11, 15, 0.85);
+
+    padding: 20px 6%;
+
+    background: rgba(8, 9, 13, 0.75);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid var(--border);
+
+    z-index: 1000;
 }
 
 nav {
@@ -28,80 +62,267 @@ nav {
     align-items: center;
 }
 
+
+/* =========================================
+   LOGO
+========================================= */
+
 .logo {
-    font-size: 24px;
+    font-size: 22px;
+
     font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: var(--text);
+
+    position: relative;
 }
+
+.logo::after {
+    content: "_";
+
+    color: var(--accent);
+
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
 
 nav ul {
     display: flex;
-    gap: 30px;
+
+    gap: 35px;
+
     list-style: none;
 }
 
 nav a {
-    color: white;
+    position: relative;
+
+    color: var(--muted);
+
     text-decoration: none;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    transition: 0.3s;
 }
 
 nav a:hover {
-    opacity: 0.6;
+    color: var(--text);
 }
+
+nav a::before {
+    content: ">";
+
+    position: absolute;
+
+    left: -15px;
+
+    color: var(--accent);
+
+    opacity: 0;
+
+    transform: translateX(-5px);
+
+    transition: 0.3s;
+}
+
+nav a:hover::before {
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+
+/* =========================================
+   SECTIONS
+========================================= */
 
 section {
     min-height: 100vh;
+
     padding: 140px 10%;
 }
 
+
+/* =========================================
+   HERO
+========================================= */
+
 #inicio {
+    position: relative;
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
+    overflow: hidden;
 }
+
+
+/* Background decoration */
+
+#inicio::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    right: -150px;
+
+    top: 20%;
+
+    background: var(--accent);
+
+    filter: blur(180px);
+
+    opacity: 0.12;
+
+    pointer-events: none;
+}
+
+
+/* Small label */
 
 #inicio p:first-child {
-    font-size: 14px;
-    letter-spacing: 4px;
-    opacity: 0.6;
+
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    color: var(--accent);
+
+    font-weight: bold;
 }
+
+
+/* Name */
 
 h1 {
+
     font-size: clamp(70px, 12vw, 160px);
-    line-height: 0.85;
-    margin: 25px 0;
+
+    line-height: 0.82;
+
+    letter-spacing: -5px;
+
+    margin: 30px 0;
+
+    font-weight: 800;
 }
+
+
+/* Description */
 
 #inicio p {
-    max-width: 500px;
-    line-height: 1.6;
+
+    max-width: 520px;
+
+    line-height: 1.7;
+
+    color: var(--muted);
+
+    font-size: 17px;
 }
 
+
+/* Button */
+
 #inicio a {
+
     display: inline-block;
+
     width: fit-content;
+
     margin-top: 35px;
-    padding: 14px 25px;
-    border: 1px solid white;
-    color: white;
+
+    padding: 15px 28px;
+
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
     text-decoration: none;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    transition: 0.3s;
 }
 
 #inicio a:hover {
-    background: white;
-    color: #0b0b0f;
+
+    border-color: var(--accent);
+
+    background: var(--accent);
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 30px rgba(124, 92, 255, 0.25);
 }
 
+
+/* =========================================
+   HEADINGS
+========================================= */
+
 h2 {
-    font-size: 50px;
+
+    font-size: clamp(40px, 6vw, 70px);
+
     margin-bottom: 20px;
+
+    letter-spacing: -2px;
 }
 
 section p {
+
     line-height: 1.7;
 }
 
+
+/* =========================================
+   FOOTER
+========================================= */
+
 footer {
+
     padding: 40px;
+
     text-align: center;
-    opacity: 0.5;
+
+    color: var(--muted);
+
+    border-top: 1px solid var(--border);
+
+    font-size: 13px;
 }
