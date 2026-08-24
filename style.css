@@ -863,7 +863,9 @@ footer {
 
 .development-chart {
 
-    height: 300px;
+    width: 100%;
+
+    height: 480px;
 
     display: flex;
 
@@ -871,9 +873,26 @@ footer {
 
     align-items: center;
 
-    background: rgba(255, 255, 255, 0.015);
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(64, 220, 203, 0.035),
+            transparent 60%
+        );
 
     border: 1px solid var(--border);
+
+    overflow: hidden;
+
+}
+
+#development-chart {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
 
 }
 
