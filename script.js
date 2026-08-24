@@ -185,6 +185,72 @@ function openProject(projectID) {
 
     document.body.style.overflow = "hidden";
 
+   /* =====================================
+   DEVELOPMENT DISPLAY
+===================================== */
+
+const radarContainer =
+    document.getElementById("radar-container");
+
+const progressContainer =
+    document.getElementById("progress-container");
+
+const developmentTitle =
+    document.getElementById("development-title");
+
+
+/*
+    Limpiar
+*/
+
+progressContainer.innerHTML = "";
+
+
+/*
+    GAME PROJECT
+*/
+
+if (project.profile) {
+
+    radarContainer.style.display = "flex";
+
+    progressContainer.style.display = "none";
+
+    developmentTitle.textContent =
+        "DEVELOPMENT PROFILE";
+
+
+    setTimeout(() => {
+
+        drawDevelopmentChart(
+            project.profile
+        );
+
+    }, 250);
+
+}
+
+
+/*
+    SOFTWARE PROJECT
+*/
+
+else if (project.progress) {
+
+    radarContainer.style.display = "none";
+
+    progressContainer.style.display =
+        "block";
+
+    developmentTitle.textContent =
+        "PROJECT PROGRESS";
+
+
+    drawProgressBars(
+        project.progress
+    );
+
+}
 
     /* =====================================
        DEVELOPMENT PROFILE
@@ -720,3 +786,76 @@ document.addEventListener("keydown", event => {
     }
 
 });
+
+/* =========================================
+   PROJECT PROGRESS BARS
+========================================= */
+
+function drawProgressBars(progress) {
+
+    const container =
+        document.getElementById(
+            "progress-container"
+        );
+
+
+    const names = {
+
+        development: "DEVELOPMENT",
+
+        database: "DATABASE",
+
+        interface: "INTERFACE",
+
+        testing: "TESTING",
+
+        documentation: "DOCUMENTATION"
+
+    };
+
+
+    Object.entries(progress).forEach(
+        ([key, value]) => {
+
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            "progress-item";
+
+
+        wrapper.innerHTML = `
+
+            <div class="progress-header">
+
+                <span>
+                    ${names[key]}
+                </span>
+
+                <span>
+                    ${value}%
+                </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    style="--progress:${value}%">
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(wrapper);
+
+    });
+
+}
+
