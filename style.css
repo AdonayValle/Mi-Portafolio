@@ -29,10 +29,17 @@ body {
     --surface: #11131a;
     --text: #f5f5f5;
     --muted: #858894;
+
     --accent: #7c5cff;
+
+    --turquoise: #40dccb;
+
+    --dark-green: #173b38;
+
+    --mustard: #a8954b;
+
     --border: rgba(255, 255, 255, 0.1);
 }
-
 
 /* =========================================
    HEADER
@@ -326,3 +333,282 @@ footer {
 
     font-size: 13px;
 }
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+#proyectos {
+    background: #0a0b10;
+}
+
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-label {
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    margin-bottom: 15px;
+}
+
+.section-header > p:last-child {
+    color: var(--muted);
+    max-width: 550px;
+}
+
+
+/* =========================================
+   PROJECT GRID
+========================================= */
+
+.projects-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+
+}
+
+
+/* =========================================
+   PROJECT CARD
+========================================= */
+
+.project-card {
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+
+}
+
+.project-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: rgba(64, 220, 202, 0.45);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+
+}
+
+
+/* =========================================
+   PROJECT IMAGE AREA
+========================================= */
+
+.project-image {
+
+    height: 280px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    padding: 20px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #171923,
+            #0d0e14
+        );
+
+}
+
+
+/* Decorative grid */
+
+.project-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+
+}
+
+
+/* Glow */
+
+.project-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: var(--accent);
+
+    filter: blur(80px);
+
+    opacity: 0.15;
+
+    top: 30px;
+
+    right: 30px;
+
+    transition: 0.4s;
+
+}
+
+.project-card:hover .project-image::after {
+
+    opacity: 0.3;
+
+}
+
+
+/* Project number */
+
+.project-image span {
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: #aaa;
+
+}
+
+
+/* =========================================
+   PROJECT CONTENT
+========================================= */
+
+.project-content {
+
+    padding: 25px;
+
+}
+
+.project-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+}
+
+.project-top h3 {
+
+    font-size: 23px;
+
+    line-height: 1.1;
+
+}
+
+.project-top > span {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #777;
+
+    white-space: nowrap;
+
+}
+
+.project-content p {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin: 18px 0 22px;
+
+}
+
+
+/* =========================================
+   TAGS
+========================================= */
+
+.project-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+.project-tags span {
+
+    padding: 7px 10px;
+
+    border: 1px solid var(--border);
+
+    color: #999;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    transition: 0.3s;
+
+}
+
+.project-card:hover .project-tags span {
+
+    border-color: rgba(64, 220, 202, 0.25);
+
+    color: #40dccb;
+
+}
+
+
+
+
