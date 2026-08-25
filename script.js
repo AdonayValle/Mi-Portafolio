@@ -24,6 +24,13 @@ deltarune: {
         release: 5
     },
 
+images: [
+    "images/projects/deltarune-1.png",
+    "images/projects/deltarune-2.png",
+    "images/projects/deltarune-3.png",
+    "images/projects/deltarune-4.png"
+]
+   
     description:
         "Juego de lucha inspirado en Deltarune y otros fighting games. El proyecto experimenta con sistemas de combate, personajes, knockback, porcentajes y habilidades especiales.",
 
