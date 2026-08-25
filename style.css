@@ -439,12 +439,61 @@ footer {
             #0d0e14
         );
 
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transition:
+        background-size 0.5s
+        cubic-bezier(.2,.8,.2,1);
+
 }
 
 
-/* Decorative grid */
+/* =========================================
+   PROJECT CARD IMAGE
+========================================= */
 
-.project-image::before {
+.project-image.has-project-image {
+
+    background-size: cover;
+
+    background-position: center;
+
+}
+
+
+/* =========================================
+   CINEMATIC OVERLAY
+========================================= */
+
+.project-image.has-project-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(8, 9, 13, 0.70),
+            rgba(8, 9, 13, 0.08)
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================
+   DECORATIVE GRID
+========================================= */
+
+.project-image::after {
 
     content: "";
 
@@ -454,20 +503,32 @@ footer {
 
     background-image:
         linear-gradient(
-            rgba(255,255,255,0.035) 1px,
+            rgba(255,255,255,0.025) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,0.035) 1px,
+            rgba(255,255,255,0.025) 1px,
             transparent 1px
         );
 
     background-size: 40px 40px;
 
+    pointer-events: none;
+
 }
 
 
+/* =========================================
+   IMAGE HOVER
+========================================= */
+
+.project-card:hover
+.project-image.has-project-image {
+
+    background-size: 108%;
+
+}
 /* Glow */
 
 .project-image::after {
