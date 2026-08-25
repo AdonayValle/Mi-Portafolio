@@ -1292,6 +1292,10 @@ footer {
 }
 
 
+/* =========================================
+   GALLERY IMAGE
+========================================= */
+
 #project-gallery-image {
 
     width: 100%;
@@ -1302,12 +1306,31 @@ footer {
 
     display: block;
 
+    opacity: 1;
+
+    transform:
+        scale(1)
+        translateX(0);
+
     transition:
-        opacity 0.2s ease,
-        transform 0.3s ease;
+        opacity 0.35s ease,
+        transform 0.45s
+        cubic-bezier(.2,.8,.2,1);
 
 }
 
+
+/* Estado durante cambio */
+
+#project-gallery-image.gallery-changing {
+
+    opacity: 0;
+
+    transform:
+        scale(0.985)
+        translateX(8px);
+
+}
 
 .gallery-arrow {
 
