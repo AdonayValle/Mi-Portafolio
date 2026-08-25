@@ -863,14 +863,22 @@ function drawProgressBars(progress) {
    SKILLS ANIMATION
 ========================================= */
 
-const skillObserver =
-    new IntersectionObserver(
+const skillsSection =
+    document.getElementById("habilidades");
 
-        entries => {
 
-            entries.forEach(entry => {
+if (skillsSection) {
 
-                if (entry.isIntersecting) {
+    const skillObserver =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting)
+                        return;
+
 
                     const fills =
                         entry.target.querySelectorAll(
@@ -878,17 +886,25 @@ const skillObserver =
                         );
 
 
-                    fills.forEach(fill => {
+                    fills.forEach(
+                        (fill, index) => {
 
                         const level =
-                            fill.style
-                                .getPropertyValue(
-                                    "--level"
-                                );
+                            parseFloat(
+                                fill.dataset.level
+                            );
 
 
-                        fill.style.width =
-                            `${level * 10}%`;
+                        if (isNaN(level))
+                            return;
+
+
+                        setTimeout(() => {
+
+                            fill.style.width =
+                                `${level * 10}%`;
+
+                        }, index * 100);
 
                     });
 
@@ -897,24 +913,16 @@ const skillObserver =
                         entry.target
                     );
 
-                }
+                });
 
-            });
+            },
 
-        },
+            {
+                threshold: 0.2
+            }
 
-        {
-            threshold: 0.2
-        }
+        );
 
-    );
-
-
-const skillsSection =
-    document.getElementById("habilidades");
-
-
-if (skillsSection) {
 
     skillObserver.observe(
         skillsSection
