@@ -968,15 +968,13 @@ if (skillsSection) {
 }
 
 
-/* =========================================
+//* =========================================
    PROJECT GALLERY
 ========================================= */
 
 function loadProjectGallery(project) {
 
-    currentProject =
-        project;
-
+    currentProject = project;
     currentImageIndex = 0;
 
 
@@ -985,38 +983,76 @@ function loadProjectGallery(project) {
             "project-gallery-image"
         );
 
-
     const dots =
         document.getElementById(
             "gallery-dots"
         );
 
+    const cover =
+        document.getElementById(
+            "modal-image"
+        );
+
+
+    /* =====================================
+       PROJECT COVER
+    ===================================== */
+
+    if (
+        project.images &&
+        project.images.length > 0
+    ) {
+
+        cover.style.backgroundImage =
+            `url("${project.images[0]}")`;
+
+        cover.classList.add("has-image");
+
+    } else {
+
+        cover.style.backgroundImage = "";
+
+        cover.classList.remove("has-image");
+
+    }
+
+
+    /* =====================================
+       GALLERY
+    ===================================== */
 
     if (
         !project.images ||
         project.images.length === 0
     ) {
 
-        image.style.display =
-            "none";
+        image.style.display = "none";
 
-        dots.innerHTML =
-            "";
+        dots.innerHTML = "";
 
         return;
 
     }
 
 
-    image.style.display =
-        "block";
+    image.style.display = "block";
+
+
+    /* Start with first image */
+
+    image.classList.remove(
+        "gallery-changing"
+    );
 
 
     updateGallery();
 
 
-    dots.innerHTML =
-        "";
+    /* =====================================
+       DOTS
+    ===================================== */
+
+    dots.innerHTML = "";
 
 
     project.images.forEach(
@@ -1045,6 +1081,11 @@ function loadProjectGallery(project) {
             "click",
             () => {
 
+                if (
+                    index === currentImageIndex
+                ) return;
+
+
                 currentImageIndex =
                     index;
 
@@ -1061,7 +1102,6 @@ function loadProjectGallery(project) {
     });
 
 }
-
 
 /* =========================================
    UPDATE GALLERY
