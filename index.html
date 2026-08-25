@@ -275,7 +275,40 @@
         <div class="modal-section">
 
             <h3>ABOUT</h3>
+<!-- PROJECT GALLERY -->
 
+<div class="project-gallery">
+
+    <button
+        class="gallery-arrow gallery-prev"
+        onclick="changeProjectImage(-1)">
+        ‹
+    </button>
+
+
+    <div class="gallery-image-container">
+
+        <img
+            id="project-gallery-image"
+            src=""
+            alt="Project screenshot">
+
+    </div>
+
+
+    <button
+        class="gallery-arrow gallery-next"
+        onclick="changeProjectImage(1)">
+        ›
+    </button>
+
+</div>
+
+
+<div
+    id="gallery-dots"
+    class="gallery-dots">
+</div>
             <p id="modal-description">
                 Project description.
             </p>
