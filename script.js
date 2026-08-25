@@ -1233,3 +1233,71 @@ document.addEventListener(
     }
 
 });
+
+/* =========================================
+   PROJECT CARD IMAGES
+========================================= */
+
+function loadProjectCardImages() {
+
+    const cards = document.querySelectorAll(
+        ".project-card"
+    );
+
+    cards.forEach(card => {
+
+        const onclick =
+            card.getAttribute("onclick");
+
+        if (!onclick) return;
+
+
+        const match =
+            onclick.match(
+                /openProject\('([^']+)'\)/
+            );
+
+        if (!match) return;
+
+
+        const projectID =
+            match[1];
+
+        const project =
+            projects[projectID];
+
+        if (
+            !project ||
+            !project.images ||
+            project.images.length === 0
+        ) return;
+
+
+        const imageContainer =
+            card.querySelector(
+                ".project-image"
+            );
+
+        if (!imageContainer) return;
+
+
+        imageContainer.style.backgroundImage =
+            `url("${project.images[0]}")`;
+
+        imageContainer.classList.add(
+            "has-project-image"
+        );
+
+    });
+
+}
+
+
+/* Load images when page starts */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadProjectCardImages
+);
+
+
