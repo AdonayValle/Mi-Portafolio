@@ -1,3 +1,7 @@
+let currentProject = null;
+
+let currentImageIndex = 0;
+
 /* =========================================
    PROJECT DATA
 ========================================= */
@@ -143,7 +147,7 @@ function openProject(projectID) {
     const project = projects[projectID];
 
     if (!project) return;
-
+   loadProjectGallery(project);
 
     document.getElementById("modal-number").textContent =
         project.number;
@@ -927,5 +931,162 @@ if (skillsSection) {
     skillObserver.observe(
         skillsSection
     );
+
+}
+
+
+/* =========================================
+   PROJECT GALLERY
+========================================= */
+
+function loadProjectGallery(project) {
+
+    currentProject = project;
+
+    currentImageIndex = 0;
+
+
+    const image =
+        document.getElementById(
+            "project-gallery-image"
+        );
+
+
+    const dots =
+        document.getElementById(
+            "gallery-dots"
+        );
+
+
+    if (
+        !project.images ||
+        project.images.length === 0
+    ) {
+
+        image.style.display = "none";
+
+        dots.innerHTML = "";
+
+        return;
+
+    }
+
+
+    image.style.display = "block";
+
+
+    updateGallery();
+
+
+    dots.innerHTML = "";
+
+
+    project.images.forEach(
+        (_, index) => {
+
+        const dot =
+            document.createElement("span");
+
+
+        dot.className =
+            "gallery-dot";
+
+
+        if (index === 0) {
+
+            dot.classList.add("active");
+
+        }
+
+
+        dot.addEventListener(
+            "click",
+            () => {
+
+                currentImageIndex =
+                    index;
+
+                updateGallery();
+
+            }
+        );
+
+
+        dots.appendChild(dot);
+
+    });
+
+}
+
+function updateGallery() {
+
+    if (!currentProject) return;
+
+
+    const image =
+        document.getElementById(
+            "project-gallery-image"
+        );
+
+
+    const dots =
+        document.querySelectorAll(
+            ".gallery-dot"
+        );
+
+
+    image.src =
+        currentProject.images[
+            currentImageIndex
+        ];
+
+
+    dots.forEach(
+        (dot, index) => {
+
+        dot.classList.toggle(
+            "active",
+            index === currentImageIndex
+        );
+
+    });
+
+}
+
+function changeProjectImage(direction) {
+
+    if (!currentProject) return;
+
+    if (
+        !currentProject.images ||
+        currentProject.images.length === 0
+    ) return;
+
+
+    currentImageIndex += direction;
+
+
+    if (
+        currentImageIndex <
+        0
+    ) {
+
+        currentImageIndex =
+            currentProject.images.length - 1;
+
+    }
+
+
+    if (
+        currentImageIndex >=
+        currentProject.images.length
+    ) {
+
+        currentImageIndex = 0;
+
+    }
+
+
+    updateGallery();
 
 }
