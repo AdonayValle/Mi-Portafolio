@@ -1128,21 +1128,46 @@ function updateGallery() {
         );
 
 
-    image.src =
-        currentProject.images[
-            currentImageIndex
-        ];
+    /* Start fade out */
+
+    image.classList.add(
+        "gallery-changing"
+    );
 
 
-    dots.forEach(
-        (dot, index) => {
+    setTimeout(() => {
 
-        dot.classList.toggle(
-            "active",
-            index === currentImageIndex
-        );
+        image.src =
+            currentProject.images[
+                currentImageIndex
+            ];
 
-    });
+
+        dots.forEach(
+            (dot, index) => {
+
+            dot.classList.toggle(
+                "active",
+                index === currentImageIndex
+            );
+
+        });
+
+
+        /*
+            Esperar a que la imagen
+            cambie antes de mostrarla
+        */
+
+        requestAnimationFrame(() => {
+
+            image.classList.remove(
+                "gallery-changing"
+            );
+
+        });
+
+    }, 180);
 
 }
 
