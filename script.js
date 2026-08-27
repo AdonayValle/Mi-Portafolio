@@ -100,7 +100,7 @@ const projects = {
         },
 
         images: [
-           "images/projects/undertale-1.png"
+           "images/projects/undertale-1.png",
            "images/projects/undertale-2.png"
         ],
 
