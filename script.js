@@ -1363,3 +1363,125 @@ document
         );
 
     });
+
+
+/* =========================================
+   COSMIC PARTICLES
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const container =
+        document.getElementById("cosmic-particles");
+
+    if (!container) return;
+
+
+    const colors = [
+
+        "#40dccb", // turquoise
+        "#7c5cff", // purple
+        "#173b38", // dark green
+        "#a8954b"  // mustard
+
+    ];
+
+
+    const particleCount = 65;
+
+
+    for (let i = 0; i < particleCount; i++) {
+
+        const particle =
+            document.createElement("div");
+
+
+        particle.classList.add(
+            "cosmic-particle"
+        );
+
+
+        /* Algunas partículas son estrellas */
+
+        if (Math.random() < 0.12) {
+
+            particle.classList.add(
+                "cosmic-star"
+            );
+
+        }
+
+
+        /* Tamaño */
+
+        const size =
+            Math.random() * 3 + 1;
+
+
+        particle.style.width =
+            `${size}px`;
+
+        particle.style.height =
+            `${size}px`;
+
+
+        /* Posición */
+
+        particle.style.left =
+            `${Math.random() * 100}%`;
+
+        particle.style.top =
+            `${Math.random() * 100}%`;
+
+
+        /* Color */
+
+        const color =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+
+        particle.style.background =
+            color;
+
+
+        /* Opacidad */
+
+        particle.style.setProperty(
+
+            "--opacity",
+
+            Math.random() * 0.35 + 0.15
+
+        );
+
+
+        /* Velocidad */
+
+        particle.style.setProperty(
+
+            "--duration",
+
+            `${Math.random() * 8 + 6}s`
+
+        );
+
+
+        /* Aparición escalonada */
+
+        particle.style.animationDelay =
+            `${Math.random() * 4}s`;
+
+
+        container.appendChild(
+            particle
+        );
+
+    }
+
+});
+
