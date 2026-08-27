@@ -1833,89 +1833,7 @@ footer {
 
 }
 
-/* =========================================
-   CONTACT
-========================================= */
 
-#contacto {
-
-    min-height: 75vh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-}
-
-
-/* Contenido */
-
-.contact-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-}
-
-
-/* Pregunta */
-
-.contact-question {
-
-    margin-top: 20px;
-
-    margin-bottom: 10px;
-
-    color: var(--muted);
-
-    font-size: 16px;
-
-}
-
-
-/* Título */
-
-#contacto h2 {
-
-    margin: 0;
-
-    font-size: clamp(
-        65px,
-        11vw,
-        150px
-    );
-
-    line-height: 0.9;
-
-    letter-spacing: -5px;
-
-}
-
-
-/* Cursor */
-
-#contacto .cursor {
-
-    color: var(--accent);
-
-    animation: blink 1s infinite;
-
-}
 
 
 /* =========================================
@@ -2016,6 +1934,117 @@ footer {
             203,
             0.12
         );
+
+}
+
+/* =========================================
+   CONTACT COSMIC GLOW
+========================================= */
+
+#contacto::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(64, 220, 203, 0.13) 0%,
+            rgba(64, 220, 203, 0.055) 25%,
+            rgba(64, 220, 203, 0.018) 45%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+
+/* =========================================
+   CONTACT NEON STARS
+========================================= */
+
+#contacto::after {
+
+    content:
+        "✦      ·          ✦"
+        "    ·       ✦"
+        "  ✦          ·"
+        "       ·          ✦";
+
+    position: absolute;
+
+    width: 700px;
+    height: 500px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: var(--turquoise);
+
+    font-size: 18px;
+
+    line-height: 100px;
+
+    letter-spacing: 35px;
+
+    opacity: 0.22;
+
+    text-shadow:
+        0 0 8px var(--turquoise),
+        0 0 18px rgba(64, 220, 203, 0.7);
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    animation:
+        contactStars 6s ease-in-out infinite;
+
+}
+
+
+/* =========================================
+   CONTACT STAR ANIMATION
+========================================= */
+
+@keyframes contactStars {
+
+    0%,
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 0.18;
+
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.04);
+
+        opacity: 0.34;
+
+    }
 
 }
 
