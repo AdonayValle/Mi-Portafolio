@@ -2048,6 +2048,74 @@ footer {
 
 }
 
+/* =========================================
+   CONTACT PARTICLES
+========================================= */
+
+.contact-star {
+
+    position: absolute;
+
+    color: var(--turquoise);
+
+    font-size: var(--star-size);
+
+    opacity: 0;
+
+    text-shadow:
+        0 0 5px var(--turquoise),
+        0 0 12px var(--turquoise);
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    animation:
+        contactStarAppear
+        4s ease-in-out infinite;
+
+}
+
+
+@keyframes contactStarAppear {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.4);
+
+    }
+
+    35% {
+
+        opacity: 0.7;
+
+        transform:
+            scale(1);
+
+    }
+
+    65% {
+
+        opacity: 0.35;
+
+        transform:
+            scale(0.8);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.4);
+
+    }
+
+}
 
 
 
