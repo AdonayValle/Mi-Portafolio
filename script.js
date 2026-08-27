@@ -1300,4 +1300,27 @@ document.addEventListener(
     loadProjectCardImages
 );
 
+/* =========================================
+   AMBIENT DECORATION
+========================================= */
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll("section").forEach(section => {
+
+        const decoration = document.createElement("div");
+
+        decoration.className = "section-decoration";
+
+        decoration.innerHTML = `
+            <span class="decor-star">✦</span>
+            <span class="decor-dot decor-dot-1"></span>
+            <span class="decor-dot decor-dot-2"></span>
+            <span class="decor-line"></span>
+        `;
+
+        section.appendChild(decoration);
+
+    });
+
+});
