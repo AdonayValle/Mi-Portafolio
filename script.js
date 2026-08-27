@@ -1487,3 +1487,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+/* =========================================
+   CONTACT PARTICLES
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const contact =
+            document.getElementById(
+                "contacto"
+            );
+
+        if (!contact) return;
+
+
+        for (let i = 0; i < 18; i++) {
+
+            const star =
+                document.createElement(
+                    "span"
+                );
+
+            star.className =
+                "contact-star";
+
+
+            star.textContent =
+                Math.random() < 0.35
+                    ? "✦"
+                    : "·";
+
+
+            star.style.left =
+                `${10 + Math.random() * 80}%`;
+
+            star.style.top =
+                `${10 + Math.random() * 80}%`;
+
+
+            star.style.animationDelay =
+                `${Math.random() * 4}s`;
+
+
+            star.style.setProperty(
+                "--star-size",
+                `${Math.random() * 10 + 7}px`
+            );
+
+
+            contact.appendChild(star);
+
+        }
+
+    }
+);
+
