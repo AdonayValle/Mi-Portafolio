@@ -1324,3 +1324,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+/* =========================================
+   SECTION DECORATION OBSERVER
+========================================= */
+
+const decorationObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting)
+                    return;
+
+                entry.target.classList.add(
+                    "visible"
+                );
+
+            });
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+document
+    .querySelectorAll("section")
+    .forEach(section => {
+
+        decorationObserver.observe(
+            section
+        );
+
+    });
