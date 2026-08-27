@@ -64,8 +64,7 @@ const projects = {
         },
 
         images: [
-            // Por ahora puedes dejarlas vacías.
-            // Cuando tengas las capturas las añadimos.
+           "images/projects/cheques-1.jpeg"
         ],
 
         description:
@@ -100,7 +99,10 @@ const projects = {
             release: 3
         },
 
-        images: [],
+        images: [
+           "images/projects/undertale-1.png"
+           "images/projects/undertale-2.png"
+        ],
 
         description:
             "Motor experimental de combate inspirado en las mecánicas de batalla de Undertale.",
