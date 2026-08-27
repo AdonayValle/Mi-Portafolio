@@ -1662,3 +1662,25 @@ section.visible .section-decoration {
         translateY(0);
 
 }
+
+.section-header::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-top: 1px solid var(--dark-green);
+
+    border-left: 1px solid var(--dark-green);
+
+    margin-left: -18px;
+
+    margin-top: -12px;
+
+    opacity: 0.7;
+
+}
